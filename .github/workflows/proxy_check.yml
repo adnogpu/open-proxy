@@ -1,12 +1,13 @@
-name: Proxy Check
+name: Deploy to GitHub Pages
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # 每小时运行一次
+  push:
+    branches:
+      - main  # 监听 main 分支的推送
   workflow_dispatch:
 
 jobs:
-  proxy-check:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,19 +27,21 @@ jobs:
       run: |
         python main.py
 
-    - name: Set up gh-pages branch
+    - name: Prepare docs directory
+      run: |
+        mkdir -p docs
+        cp ./proxy/proxy/http.txt docs/
+
+    - name: Commit files
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        # Ensure we are on the gh-pages branch and create it if it doesn't exist
-        git checkout gh-pages || git checkout -b gh-pages
-        # Create directory structure
-        mkdir -p proxy/proxy
-        # Copy the good.txt file to the proxy directory
-        cp good.txt proxy/proxy/http.txt
-
-    - name: Commit and push changes
-      run: |
-        git add proxy/proxy/http.txt
-        git commit -m 'Update valid proxies'
+        git add docs/
+        git commit -m 'Deploy proxies to GitHub Pages'
         git push origin gh-pages
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
