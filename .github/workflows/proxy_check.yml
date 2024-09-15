@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'  # 每30分钟执行一次
 
 jobs:
   deploy:
