@@ -53,7 +53,7 @@ def test_proxies(proxies, max_workers=100):
     return valid_proxies
 
 # 下载代理并检测有效性
-def download_and_check_proxies(proxy_url, output_file='good.txt', max_workers=100):
+def download_and_check_proxies(proxy_url, output_file='good.txt', max_workers=250):
     # 下载代理列表
     download_proxy_list(proxy_url, 'proxy.txt')
 
@@ -75,4 +75,4 @@ if __name__ == "__main__":
     proxy_url = "https://openproxylist.xyz/http.txt"
 
     # 下载代理列表并检测有效性
-    download_and_check_proxies(proxy_url, 'good.txt', max_workers=500)
+    download_and_check_proxies(proxy_url, 'good.txt', max_workers=250)
