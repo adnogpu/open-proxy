@@ -26,13 +26,16 @@ jobs:
       run: |
         python main.py
 
-    # 添加步骤：将生成的 good.txt 文件复制到 gh-pages 分支
-    - name: Checkout gh-pages branch
+    - name: Set up gh-pages branch
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        git checkout gh-pages || git checkout --orphan gh-pages
-        cp good.txt ./proxy/proxy/http.txt
-        git add .
-        git commit -m 'Update good.txt with valid proxies'
+        git checkout gh-pages || git checkout -b gh-pages
+        mkdir -p proxy/proxy  # 创建目录
+        cp good.txt proxy/proxy/http.txt
+
+    - name: Commit and push changes
+      run: |
+        git add proxy/proxy/http.txt
+        git commit -m 'Update valid proxies'
         git push origin gh-pages
