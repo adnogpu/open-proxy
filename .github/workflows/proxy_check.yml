@@ -27,18 +27,34 @@ jobs:
       run: |
         python main.py
 
+    - name: List files for debugging
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Files in current directory:"
+        ls -la
+
     - name: Prepare docs directory
       run: |
         mkdir -p docs
         cp ./proxy/proxy/http.txt docs/
 
-    - name: Commit files
+    - name: List files in docs directory
+      run: |
+        echo "Files in docs directory:"
+        ls -la docs/
+
+    - name: Set up Git
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
+
+    - name: Commit and push to gh-pages
+      run: |
+        git checkout -b gh-pages || git checkout gh-pages
         git add docs/
-        git commit -m 'Deploy proxies to GitHub Pages'
-        git push origin gh-pages
+        git commit -m 'Deploy proxies to GitHub Pages' || echo "No changes to commit"
+        git push -u origin gh-pages
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
