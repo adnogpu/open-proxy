@@ -1,0 +1,33 @@
+name: Proxy Check
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时运行一次
+  workflow_dispatch:
+
+jobs:
+  proxy-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install requests colorama tqdm
+
+    - name: Run proxy check script
+      run: |
+        python main.py
+
+    - name: Upload proxies
+      uses: actions/upload-artifact@v2
+      with:
+        name: valid-proxies
+        path: ./proxy/proxy/http
