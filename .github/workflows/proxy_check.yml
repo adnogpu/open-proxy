@@ -26,14 +26,12 @@ jobs:
       run: |
         python main.py
 
+    - name: List files in proxy directory
+      run: |
+        ls -la
+
     - name: Upload proxies to GitHub Pages
-      run: |
-        cp ./proxy/proxy/http.txt ./docs/
-    
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        git add ./docs/http.txt
-        git commit -m "Update proxy file"
-        git push
+      uses: actions/upload-artifact@v3
+      with:
+        name: valid-proxies
+        path: good.txt
