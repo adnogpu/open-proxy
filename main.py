@@ -19,7 +19,7 @@ def download_proxy_list(url, file_path):
 
 # 检测代理有效性（通过状态码）
 def check_proxy(proxy):
-    test_url = "https://ddns.oray.com/checkip"
+    test_url = "http://165.154.13.41/"
     proxies = {
         "http": proxy,
         "https": proxy
@@ -75,4 +75,4 @@ if __name__ == "__main__":
     proxy_url = "https://openproxylist.xyz/http.txt"
 
     # 下载代理列表并检测有效性
-    download_and_check_proxies(proxy_url, 'good.txt', max_workers=100)
+    download_and_check_proxies(proxy_url, 'good.txt', max_workers=200)
