@@ -27,7 +27,7 @@ jobs:
         python main.py
 
     - name: Upload proxies
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3  # 使用v3
       with:
         name: valid-proxies
-        path: ./proxy/proxy/http
+        path: ./proxy/proxy/http.txt
