@@ -75,4 +75,4 @@ if __name__ == "__main__":
     proxy_url = "https://openproxylist.xyz/http.txt"
 
     # 下载代理列表并检测有效性
-    download_and_check_proxies(proxy_url, 'good.txt', max_workers=200)
+    download_and_check_proxies(proxy_url, 'good.txt', max_workers=500)
