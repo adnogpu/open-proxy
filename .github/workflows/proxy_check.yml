@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'  # 每30分钟执行一次
+    - cron: '*/30 * * * *'
 
 jobs:
   deploy:
@@ -40,6 +40,7 @@ jobs:
       run: |
         mkdir -p docs
         cp ./good.txt docs/
+        echo 'your.custom.domain' > docs/CNAME  # 保留自定义域名
 
     - name: List files in docs directory
       run: |
