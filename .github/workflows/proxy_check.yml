@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # 监听 main 分支的推送
+      - main
   workflow_dispatch:
 
 jobs:
@@ -37,7 +37,6 @@ jobs:
     - name: Prepare docs directory
       run: |
         mkdir -p docs
-        # 将 good.txt 复制到 docs 目录
         cp ./good.txt docs/
 
     - name: List files in docs directory
@@ -56,6 +55,8 @@ jobs:
         git add docs/
         git commit -m 'Deploy proxies to GitHub Pages' || echo "No changes to commit"
         git push -u origin gh-pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
