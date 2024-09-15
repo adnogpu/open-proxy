@@ -49,15 +49,19 @@ jobs:
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
 
-    - name: Pull changes from gh-pages
+    - name: Move untracked files
+      run: |
+        mv good.txt /tmp/good.txt || true
+
+    - name: Checkout and update gh-pages
       run: |
         git fetch origin gh-pages
-        git checkout gh-pages
-        git pull origin gh-pages
+        git checkout -B gh-pages
+        git reset --hard origin/gh-pages
+        mv /tmp/good.txt ./docs/good.txt || true
 
     - name: Commit and push to gh-pages
       run: |
-        git checkout -b gh-pages || git checkout gh-pages
         git add docs/
         git commit -m 'Deploy proxies to GitHub Pages' || echo "No changes to commit"
         git push origin gh-pages
