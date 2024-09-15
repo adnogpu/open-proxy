@@ -37,7 +37,7 @@ jobs:
     - name: Prepare docs directory
       run: |
         mkdir -p docs
-        cp ./proxy/proxy/http.txt docs/
+        cp ./proxy/proxy/good.txt docs/
 
     - name: List files in docs directory
       run: |
