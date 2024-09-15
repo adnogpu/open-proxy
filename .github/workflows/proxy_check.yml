@@ -58,7 +58,7 @@ jobs:
         git fetch origin gh-pages
         git checkout -B gh-pages
         git reset --hard origin/gh-pages
-        mv /tmp/good.txt ./docs/good.txt || true
+        mv /tmp/good.txt ./docs/http.txt || true
 
     - name: Commit and push to gh-pages
       run: |
