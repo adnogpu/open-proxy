@@ -19,7 +19,7 @@ def download_proxy_list(url, file_path):
 
 # 检测代理有效性（通过状态码）
 def check_proxy(proxy):
-    test_url = "http://165.154.13.41/"
+    test_url = "https://lanzoui.com/"
     proxies = {
         "http": proxy,
         "https": proxy
@@ -73,6 +73,7 @@ def download_and_check_proxies(proxy_url, output_file='good.txt', max_workers=25
 if __name__ == "__main__":
     # 设置代理列表的下载链接
     proxy_url = "https://openproxylist.xyz/http.txt"
+    
 
     # 下载代理列表并检测有效性
     download_and_check_proxies(proxy_url, 'good.txt', max_workers=250)
