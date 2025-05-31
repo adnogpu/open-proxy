@@ -1,6 +1,4 @@
+aiohttp
 requests
-tqdm
 colorama
-aiohttp>=3.9.0
-cchardet; platform_system != "Windows"
-aiodns
+tqdm
